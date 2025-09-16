@@ -1,15 +1,21 @@
 package com.aritra.Hotel.Service.service;
 
 import com.aritra.Hotel.Service.Dto.HotelDto;
+import com.aritra.Hotel.Service.Dto.UpdateHotelAddressDto;
 import com.aritra.Hotel.Service.Entity.Hotel;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 public interface HotelService {
 
    public Hotel saveHotel(HotelDto hoteldto); //passing HotelDt
-
-    public Hotel getAllHotel(HotelDto hoteldto);
+    List<Hotel> getAllHotels( );
+    public Hotel getHotelById( long id);
+    public void deleteHotel(long id);
+    public Hotel updateHotelAddress(UpdateHotelAddressDto updateHotelAddressDto, long id);
+    public Hotel updateHotel(HotelDto hotelDto,long  id);
 
 
 }
