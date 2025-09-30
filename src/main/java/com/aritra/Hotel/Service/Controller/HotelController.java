@@ -9,6 +9,8 @@ import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,15 +26,17 @@ public class HotelController {
     HotelService hotelService;
 
     @PostMapping("/createhotel")
-    public Hotel createHotel(@RequestBody HotelDto hotelDto){
+    public ResponseEntity<Hotel> createHotel(@RequestBody HotelDto hotelDto){
         logger.info("createHotel");
-      return  hotelService.saveHotel(hotelDto);
+       Hotel createdHotel =  hotelService.saveHotel(hotelDto);
+       return new ResponseEntity<>(createdHotel, HttpStatus.CREATED);
 
     }
 
     @GetMapping("/getAllHotels")
-    public List<Hotel> getAllHotels( ){
-        return  hotelService.getAllHotels();
+    public ResponseEntity<List<Hotel>> getAllHotels( ){
+         List<Hotel> allHotels=  hotelService.getAllHotels();
+         return new ResponseEntity<>(allHotels, HttpStatus.OK);
     }
 
     @GetMapping("/getHotel/{id}")
